@@ -29,7 +29,7 @@ A FastAPI-based collaborative code editor with real-time collaboration and AI-as
    - File sharing and collaboration
    - Access control and permissions
 
-4. **AI Debugging Assistant**
+4. **AI Debugging Assistant** (WIP)
    - Real-time code analysis
    - Error detection and suggestions
    - Performance optimization tips
@@ -176,29 +176,6 @@ collaborative-code-editor/
    docker compose exec web alembic revision --autogenerate -m "description"
    docker compose exec web alembic upgrade head
    ```
-
-## Production Deployment
-
-For production deployment:
-
-1. Update environment variables:
-   - Use strong SECRET_KEY
-   - Set proper CORS origins
-   - Use secure database credentials
-
-2. Enable HTTPS:
-   - Set up SSL certificates
-   - Configure reverse proxy (nginx)
-
-3. Set up monitoring:
-   - Configure health checks
-   - Set up logging
-   - Monitor resource usage
-
-4. Scale services:
-   - Increase service replicas
-   - Configure load balancing
-   - Set up database replication
 
 ## Contributing
 
