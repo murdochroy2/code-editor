@@ -1,0 +1,42 @@
+collaborative-code-editor/
+├── alembic/
+│   └── versions/
+├── app/
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── auth.py
+│   │   ├── code_files.py
+│   │   ├── collaboration.py
+│   │   └── ai_debugging.py
+│   ├── core/
+│   │   ├── __init__.py
+│   │   ├── config.py
+│   │   ├── security.py
+│   │   └── events.py
+│   ├── db/
+│   │   ├── __init__.py
+│   │   ├── base.py
+│   │   └── session.py
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── user.py
+│   │   ├── code_file.py
+│   │   └── editing_session.py
+│   ├── schemas/
+│   │   ├── __init__.py
+│   │   ├── user.py
+│   │   ├── code_file.py
+│   │   └── editing_session.py
+│   ├── services/
+│   │   ├── __init__.py
+│   │   ├── ai_service.py
+│   │   └── collaboration_service.py
+│   └── main.py
+├── tests/
+│   └── __init__.py
+├── .env
+├── .gitignore
+├── alembic.ini
+├── docker-compose.yml
+├── Dockerfile
+└── requirements.txt 
