@@ -1,0 +1,216 @@
+{
+  "info": {
+    "name": "Collaborative Code Editor API",
+    "description": "API collection for Real-Time Collaborative Code Editor",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000/api/v1",
+      "type": "string"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{jwt_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"email\": \"user@example.com\",\n\t\"username\": \"testuser\",\n\t\"password\": \"password123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.environment.set(\"jwt_token\", jsonData.access_token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "username",
+                  "value": "user@example.com"
+                },
+                {
+                  "key": "password",
+                  "value": "password123"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/auth/me",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "me"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Code Files",
+      "item": [
+        {
+          "name": "Create File",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/files",
+              "host": ["{{base_url}}"],
+              "path": ["files"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"example.py\",\n\t\"language\": \"python\",\n\t\"content\": \"print('Hello, World!')\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List Files",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/files?skip=0&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["files"],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get File",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/files/{{file_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["files", "{{file_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update File",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/files/{{file_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["files", "{{file_id}}"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"content\": \"print('Updated content!')\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete File",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/files/{{file_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["files", "{{file_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Invite Collaborator",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/files/{{file_id}}/invite",
+              "host": ["{{base_url}}"],
+              "path": ["files", "{{file_id}}", "invite"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"collaborator_email\": \"collaborator@example.com\"\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+} 
